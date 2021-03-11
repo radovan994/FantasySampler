@@ -1,4 +1,4 @@
-# FantasySampler
+# FantasyTop100Sampler
 Simple Python script that displays the share of players in top 100 teams overall. Works for current or past GameWeeks**. Can be modified for top 150,200..etc.
 
 
