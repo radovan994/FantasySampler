@@ -83,6 +83,23 @@ final = dict(zip((players), list(countSorted.values())))
 
 #just a little prettier print, btw. players are sorted by their team name in alphabetical order, with the ones at the bottom being players on loan from abroad
 
-print ("{:<20} {:<8} ".format('\033[1m' +'Name', '\033[1m' + 'SelectedBy'))
-for k, v in final.items():
-    print ("{:<20} {:<8}".format(k, v))
+#print ("{:<20} {:<8} ".format('\033[1m' +'Name', '\033[1m' + 'SelectedBy'))
+#for k, v in final.items():
+    #print ("{:<20} {:<8}".format(k, v))
+    
+import pandas as pd
+import plotly.express as px
+df = pd.DataFrame.from_dict(final, orient='index')
+df.index.names = ['Name']
+df.columns=['SelectedBy']
+df.reset_index(inplace=True)
+df = df.rename(columns = {'Name':'Name'})
+
+fig = px.bar(df, x="Name", y="SelectedBy", title=f"top100 player ownership for gw {gw}")
+fig.update_layout(
+    xaxis = dict(
+        tickmode='linear'
+    )
+)
+fig.update_yaxes(dtick=10)
+fig.show()
